@@ -3,6 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <style media="screen">
+      .container{
+        padding-left: 20px;
+      }
+      .title{
+        margin-bottom: 10px;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -42,9 +50,9 @@
 
           public function __toString() {
           return
-            'name: ' . $this -> getName() . '<br>'
-            . 'lastName: ' . $this -> getlastName() . '<br>'
-            . 'age: ' . $this -> getAge();
+            'Name: ' . $this -> getName() . '<br>'
+            . 'LastName: ' . $this -> getlastName() . '<br>'
+            . 'Age: ' . $this -> getAge();
           }
 
         }
@@ -67,7 +75,7 @@
 
           public function __toString() {
           return parent::__toString() . '<br>'
-            . 'role: ' . $this -> getRole();
+            . 'Role: ' . $this -> getRole();
           }
         }
 
@@ -98,19 +106,35 @@
 
           public function __toString() {
           return parent::__toString() . '<br>'
-            . 'roleBoss: ' . $this -> getRoleBoss() . '<br>'
-            . 'nameCompany' . $this-> getNameCompany();
+            . 'Role: ' . $this -> getRoleBoss() . '<br>'
+            . 'Company: ' . $this-> getNameCompany();
           }
         }
 
-        $person = new Person('Andrea', 'Grassi', 25);
         $boss = new Boss('Andrea', 'lastname', 'age', 'roleBoss', 'nameCompany');
         $employee1 = new Employee('name', 'lastname', 'age', 'role');
         $employee2 = new Employee('name', 'lastname', 'age', 'role');
-        echo $person . '<br><br>'
-          . $boss . '<br><br>'
-          . $employee1 . '<br><br>'
-          . $employee2;
+
+        ?>
+          <h1 class="title">Boss:</h1>
+          <div class="lista">
+            <?php echo $boss ?>
+          </div>
+
+          <h3 class="title">Employee1:</h3>
+          <div class="lista">
+            <?php echo $employee1 ?>
+          </div>
+
+          <h3 class="title">Employee2:</h3>
+          <div class="lista">
+            <?php echo $employee2 ?>
+          </div>
+
+        <?php
+
+
+
 
 
 
