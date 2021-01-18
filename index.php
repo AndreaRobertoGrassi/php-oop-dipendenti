@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <style media="screen">
+
+    <style>
       .container{
         padding-left: 20px;
       }
@@ -11,12 +12,13 @@
         margin-bottom: 10px;
       }
     </style>
+
   </head>
   <body>
     <div class="container">
       <?php
 
-        class Person{
+        class Person{    //persona a livello generale
           private $name;
           private $lastName;
           private $age;
@@ -48,7 +50,7 @@
             $this -> age = $age;
           }
 
-          public function __toString() {
+          public function __toString() {    //traduce l'oggetto in forma letterale
           return
             'Name: ' . $this -> getName() . '<br>'
             . 'LastName: ' . $this -> getlastName() . '<br>'
@@ -57,9 +59,9 @@
 
         }
 
-        class Employee extends Person{
+        class Employee extends Person{   //dipendente
 
-          private $role;
+          private $role;   //ruolo del dipendente
 
           function __construct($name, $lastName, $age, $role){
             parent::__construct($name, $lastName, $age);
@@ -74,15 +76,15 @@
           }
 
           public function __toString() {
-          return parent::__toString() . '<br>'
-            . 'Role: ' . $this -> getRole();
-          }
+            return parent::__toString() . '<br>'
+              . 'Role: ' . $this -> getRole();
+            }
         }
 
-        class Boss extends Person{
+        class Boss extends Person{    //boss
 
-          private $roleBoss;
-          private $nameCompany;
+          private $roleBoss;   //ruolo del boss
+          private $nameCompany;   //nome dell'azienda
 
           function __construct($name, $lastName, $age, $roleBoss, $nameCompany){
             parent::__construct($name, $lastName, $age);
@@ -105,16 +107,20 @@
           }
 
           public function __toString() {
-          return parent::__toString() . '<br>'
-            . 'Role: ' . $this -> getRoleBoss() . '<br>'
-            . 'Company: ' . $this-> getNameCompany();
-          }
+            return parent::__toString() . '<br>'
+              . 'Role: ' . $this -> getRoleBoss() . '<br>'
+              . 'Company: ' . $this-> getNameCompany();
+            }
         }
 
+
+        //istanze
         $boss = new Boss('Andrea', 'lastname', 'age', 'roleBoss', 'nameCompany');
         $employee1 = new Employee('name', 'lastname', 'age', 'role');
         $employee2 = new Employee('name', 'lastname', 'age', 'role');
 
+
+        //stampo tutto
         ?>
           <h1 class="title">Boss:</h1>
           <div class="lista">
@@ -132,11 +138,6 @@
           </div>
 
         <?php
-
-
-
-
-
 
       ?>
     </div>
