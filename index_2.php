@@ -185,15 +185,24 @@
           }
         }
 
+
+
+        try {   //controllo vincoli person
+          $p1 = new Person('Andrea', 'dfsfssdf', '(b)dateOfBirth', 6, 100);
+        } catch (Exception $e) {
+          echo 'Error Person: ' . $e-> getMessage() . '<br>';
+        }
+
+
         try { //controllo vincoli employee
-          $e1 = new Employee('Simone', 'frsdas', '(e)dateOfBirth',4, 10000, '(e)mainTask', '(e)idCode', '(e)dateOfHiring');
+          $e1 = new Employee('Sesdasd', 'frsdas', '(e)dateOfBirth',4, 10000, '(e)mainTask', '(e)idCode', '(e)dateOfHiring');
           $e2 = new Employee('Marco', 'frsdas', '(e)dateOfBirth',4, 10000, '(e)mainTask', '(e)idCode', '(e)dateOfHiring');
         } catch (Exception $e) {
           echo 'Error Employee: ' . $e-> getMessage() . '<br>';
         }
 
         try {   //controllo vincoli boss
-          $b1 = new Boss('Andrea', 'dfsfssdf', '(b)dateOfBirth', 6, 100, '(b)mainTask', '(b)idCode', '(b)dateOfHiring', '(b)profit', '(b)vacancy', '(b)sector', [$e1, $e2]);
+          $b1 = new Boss('Andsad', 'dfsfssdf', '(b)dateOfBirth', 6, 100, '(b)mainTask', '(b)idCode', '(b)dateOfHiring', '(b)profit', '(b)vacancy', '(b)sector', [$e1, $e2]);
           echo 'b1:<br>' . $b1 . '<br><br>';
         } catch (Exception $e) {
           echo 'Error Boss: ' . $e-> getMessage() . '<br>';
