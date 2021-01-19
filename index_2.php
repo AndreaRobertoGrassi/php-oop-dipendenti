@@ -12,7 +12,7 @@
           private $name;
           private $lastname;
           private $dateOfBirth;
-          private $securyLvl;
+          protected $securyLvl;
           public function __construct($name, $lastname, $dateOfBirth, $securyLvl) {
             $this -> setName($name);
             $this -> setLastname($lastname);
@@ -23,8 +23,8 @@
             return $this -> name;
           }
           public function setName($name) {
-            if (strlen($name)<=3) {
-              throw new Exception("at least 3 charachters");
+            if (strlen($name)<=3) {    //controllo lunghezza nome
+              throw new Exception("at least 3 charachters for the name");
             }
             $this -> name = $name;
           }
@@ -32,8 +32,8 @@
             return $this -> lastname;
           }
           public function setLastname($lastname) {
-            if (strlen($lastname)<=3) {
-              throw new Exception("at least 3 charachters");
+            if (strlen($lastname)<=3) {  //controllo lunghezza cognome
+              throw new Exception("at least 3 charachters for the lastname");
             }
             $this -> lastname = $lastname;
           }
@@ -63,7 +63,7 @@
 
         // VERSIONE 1
         class Employee extends Person {
-          private $ral;
+          protected $ral;
           private $mainTask;
           private $idCode;
           private $dateOfHiring;
@@ -78,6 +78,9 @@
             return $this -> $ral;
           }
           public function setRal($ral) {
+            if (!is_int($ral) || $ral<10000 || $ral>100000) {   //controllo ral employee
+              throw new Exception("ral is not valid");
+            }
             $this -> ral = $ral;
           }
           public function getMainTask() {
@@ -98,7 +101,12 @@
           public function setDateOfHiring($dateOfHiring) {
             $this -> dateOfHiring = $dateOfHiring;
           }
-          
+          public function setSecuryLvl($securyLvl) {
+            if (!is_int($securyLvl) || $securyLvl<1 || $securyLvl>5) {    //controllo livello sicurezza employee
+              throw new Exception("Security level is not valid");
+            }
+            $this -> securyLvl = $securyLvl;
+          }
           public function __toString() {
             return parent::__toString() . '<br>'
               . 'ral: ' . $this -> ral . '<br>'
@@ -142,13 +150,29 @@
             return $this -> employees;
           }
           public function setEmployees($employees) {
+            if (count($employees)==0) {   //no boss senza almeno un employee
+              throw new Exception("at least one employee");
+
+            }
             $this -> employees = $employees;
+          }
+          public function setSecuryLvl($securyLvl) {
+            if (!is_int($securyLvl) || $securyLvl<6 || $securyLvl>10) {    //controllo livello sicurezza boss
+              throw new Exception("Security level is not valid");
+            }
+            $this -> securyLvl = $securyLvl;
+          }
+          public function setRal($ral) {  //controllo ral boss
+            if (!is_int($ral)) {
+              throw new Exception("ral is not valid");
+            }
+            $this -> ral = $ral;
           }
           public function __toString() {
             return parent::__toString() . '<br>'
               . 'profit: ' . $this -> getProfit() . '<br>'
               . 'vacancy: ' . $this -> getVacancy() . '<br>'
-              . 'sector: ' . $this -> getSector() . '<br>'
+              . 'sector: ' . $this -> getSector() . '<br><br>'
               . 'employees:<br>' . $this -> getEmpsStr() . '<br>';
           }
           private function getEmpsStr() {
@@ -162,31 +186,21 @@
           }
         }
 
-        try {
-          $p1 = new Person('andrea', '(p)lastname', '(p)dateOfBirth', '(p)securyLvl');
-          // echo 'p1:<br>' . $p1 . '<br><br>';
-        } catch (Exception $e) {
-          echo 'Error: ' . $e-> getMessage();
-        }
 
-        try {
-          $e1 = new Employee('mattt', '(e)lastname', '(e)dateOfBirth', '(e)securyLvl', '(e)ral', '(e)mainTask', '(e)idCode', '(e)dateOfHiring');
+        try { //controllo vincoli employee
+          $e1 = new Employee('Giovanni', 'frsdas', '(e)dateOfBirth',4, 10000, '(e)mainTask', '(e)idCode', '(e)dateOfHiring');
           // echo 'e1:<br>' . $e1 . '<br><br>';
         } catch (Exception $e) {
-          echo 'Error: ' . $e-> getMessage();
+          echo 'Error: ' . $e-> getMessage() . '<br>';
         }
 
 
-        try {
-          $b1 = new Boss('b(name)', '(b)lastname', '(b)dateOfBirth', '(b)securyLvl', '(b)ral', '(b)mainTask', '(b)idCode', '(b)dateOfHiring', '(b)profit', '(b)vacancy', '(b)sector', [$e1, $e1, $e1, $e1]);
+        try {   //controllo vincoli boss
+          $b1 = new Boss('Andrea', 'dfsfssdf', '(b)dateOfBirth', 6, 100, '(b)mainTask', '(b)idCode', '(b)dateOfHiring', '(b)profit', '(b)vacancy', '(b)sector', [$e1, $e1, $e1, $e1]);
           echo 'b1:<br>' . $b1 . '<br><br>';
         } catch (Exception $e) {
-          echo 'Error: ' . $e-> getMessage();
+          echo 'Error: ' . $e-> getMessage() . '<br>';
         }
-
-
-
-
 
       ?>
     </div>
