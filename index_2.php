@@ -23,7 +23,7 @@
             return $this -> name;
           }
           public function setName($name) {
-            if (strlen($name)<=3) {    //controllo lunghezza nome
+            if (strlen($name)<=3) {    //se il nome ha meno di 4 caratteri
               throw new Exception("at least 3 charachters for the name");
             }
             $this -> name = $name;
@@ -32,7 +32,7 @@
             return $this -> lastname;
           }
           public function setLastname($lastname) {
-            if (strlen($lastname)<=3) {  //controllo lunghezza cognome
+            if (strlen($lastname)<=3) {  //se il cognome ha meno di 4 caratteri
               throw new Exception("at least 3 charachters for the lastname");
             }
             $this -> lastname = $lastname;
@@ -61,7 +61,6 @@
           }
         }
 
-        // VERSIONE 1
         class Employee extends Person {
           protected $ral;
           private $mainTask;
@@ -186,20 +185,18 @@
           }
         }
 
-
         try { //controllo vincoli employee
-          $e1 = new Employee('Giovanni', 'frsdas', '(e)dateOfBirth',4, 10000, '(e)mainTask', '(e)idCode', '(e)dateOfHiring');
-          // echo 'e1:<br>' . $e1 . '<br><br>';
+          $e1 = new Employee('Simone', 'frsdas', '(e)dateOfBirth',4, 10000, '(e)mainTask', '(e)idCode', '(e)dateOfHiring');
+          $e2 = new Employee('Marco', 'frsdas', '(e)dateOfBirth',4, 10000, '(e)mainTask', '(e)idCode', '(e)dateOfHiring');
         } catch (Exception $e) {
-          echo 'Error: ' . $e-> getMessage() . '<br>';
+          echo 'Error Employee: ' . $e-> getMessage() . '<br>';
         }
 
-
         try {   //controllo vincoli boss
-          $b1 = new Boss('Andrea', 'dfsfssdf', '(b)dateOfBirth', 6, 100, '(b)mainTask', '(b)idCode', '(b)dateOfHiring', '(b)profit', '(b)vacancy', '(b)sector', [$e1, $e1, $e1, $e1]);
+          $b1 = new Boss('Andrea', 'dfsfssdf', '(b)dateOfBirth', 6, 100, '(b)mainTask', '(b)idCode', '(b)dateOfHiring', '(b)profit', '(b)vacancy', '(b)sector', [$e1, $e2]);
           echo 'b1:<br>' . $b1 . '<br><br>';
         } catch (Exception $e) {
-          echo 'Error: ' . $e-> getMessage() . '<br>';
+          echo 'Error Boss: ' . $e-> getMessage() . '<br>';
         }
 
       ?>
